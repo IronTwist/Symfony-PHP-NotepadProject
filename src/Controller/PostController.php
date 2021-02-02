@@ -28,8 +28,6 @@ class PostController extends AbstractController
 
         $posts = $postRepository->findAll();
 
-        dump($posts);
-
         return $this->render('post/index.html.twig', [
             'posts' => $posts
         ]);

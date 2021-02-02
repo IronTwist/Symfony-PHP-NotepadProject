@@ -14,37 +14,13 @@
     <br>
     <h2></h2>
     
-    <input type="text" name="change_name" id="change_name" />
-    <span id="numeSchimbat">
+    {# <input type="text" name="change_name" id="change_name" />
+    <span id="numeSchimbat"> #}
    
    </span>
    
-    {% set numeNou %}a{% endset %}
-   
-    <a href="{{ path('user.changeName', {name: numeNou }) }}">Change username</a>
    
 </div>
-<script>
-        document.getElementById("change_name").onchange = function(){
-            functiaMea()
-        };
 
-        function functiaMea(){
-            var val = document.getElementById("change_name").value;
-            var locationUpdate = location.href;
-            var locationUpdate.
-
-            console.log(locationUpdate);
-            console.log(val);
-
-            location.href.replace(location.href, "/user/changeName/test");
-
-            document.getElementById("numeSchimbat").innerHTML = val;
-            
-            
-        }
-
-    
-    </script>
     
 {% endblock %}
