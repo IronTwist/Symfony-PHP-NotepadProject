@@ -13,12 +13,12 @@ class MainController extends AbstractController
     public function index(): Response
     {
         // return $this->json([
-        //     'message' => 'Welcome to Freecodecamp!'
+        //     'message' => 'Welcome to my TestApp'
             
         // ]);
 
         // return new Response("<h2>Welcome to Symphony</h2>", 200);
-
+        
         return $this->render("home/index.html.twig");
     }
 
@@ -34,7 +34,7 @@ class MainController extends AbstractController
         // dump($request->get("name"));
 
         $nume = $request->get("name");
-
+        
         // return new Response("Welecome $nume");
         return $this->render("home/custom.html.twig", [
             'name' => $nume

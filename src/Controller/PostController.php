@@ -77,6 +77,12 @@ class PostController extends AbstractController
         $post = $postRepository->find($id);
         // dump($post);
         //create the show view
+
+        if(isset($id)){
+            $_SESSION['logat'] = true;
+        }else{
+            $_SESSION['logat'] = false;
+        }
         
         return $this->render('post/show.html.twig', [
             'post' => $post

@@ -29,7 +29,7 @@ class UserController extends AbstractController
 
         $user->setName($name);
 
-        dump($name);
+        // dump($name);
         dump($user);
         
         $em = $this->getDoctrine()->getManager();
@@ -37,15 +37,14 @@ class UserController extends AbstractController
         $em->flush();
         dump($em);
 
-        // $_SESSION["testare"] = "Salut sesiune!";
+        
         // echo "<pre>";
         // print_r($_SESSION);
         // echo "</pre>";
-        $deSesiune = $_SESSION["testare"];
+    
 
         return $this->render('user/index.html.twig', [
-            'schimbaNume' => $name,
-            'de_sesiune' => $deSesiune
+            'schimbaNume' => $name
         ]);
     }
 }

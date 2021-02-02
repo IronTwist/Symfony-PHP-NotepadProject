@@ -128,7 +128,7 @@ class User implements UserInterface
     }
 
     /**
-     * Set the value of name
+     * @see  UserInterface
      *
      * @return  self
      */ 

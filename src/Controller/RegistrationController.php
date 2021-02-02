@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class RegistrationController extends AbstractController
@@ -28,13 +29,16 @@ class RegistrationController extends AbstractController
                 'first_options'  => ['label' => 'Password'],
                 'second_options' => ['label' => 'Confirm Password'],
             ])
+            ->add('name', TextType::class, [
+
+            ])
             ->add('register', SubmitType::class, [
                 'attr' => [
-                    'class' => 'btn btn-success float-right'
+                    'class' => 'btn btn-success float-right',
+                    'style' => 'margin-top: 10px'
                 ]
             ])
-            ->getForm()
-            ;
+            ->getForm();
 
 
         $form->handleRequest($request);    
@@ -42,12 +46,13 @@ class RegistrationController extends AbstractController
         if($form->isSubmitted()){
             $data = $form->getData();
 
-
             $user = new User();
             $user->setEmail($data['email']);
             $user->setPassword(
                 $passwordEncoder->encodePassword($user, $data['password'])
             );
+
+            $user->setName($data['name']);
 
             dump($user);
 
