@@ -7,6 +7,28 @@
     margin-left: 100px;
 }
 
+.userForm{
+    width: 300px;
+    border: 1px solid black;
+    padding: 20px;
+    box-shadow:  2px 2px 6px 2px black;
+    margin-top: 20px;
+    text-align: right;
+}
+
+.navigare {
+    background-color: coral;
+}
+
+.searchBox{
+    height: 40px;
+    vertical-align: middle;
+}
+
+.btn{
+    margin-top: 20px;
+}
+
 h5{
     float: right;
     margin-right: 100px;

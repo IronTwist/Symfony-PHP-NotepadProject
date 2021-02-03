@@ -28,13 +28,14 @@ class UserController extends AbstractController
                     ]
                 ])
                 ->add('name', TextType::class,[
+                    'label' => false,
                     'attr' => [
                         'placeholder' => 'Type to change name'
                     ]
                 ])
                 ->add('ChangeName', SubmitType::class,[
                     'attr' => [
-                        'class' => 'btn btn-success'
+                        'class' => 'float-right btn btn-success '
                     ]
                 ])
                 ->getForm();    //generez forma
