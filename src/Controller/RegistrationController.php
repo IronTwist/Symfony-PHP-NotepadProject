@@ -43,26 +43,26 @@ class RegistrationController extends AbstractController
 
         $form->handleRequest($request);    
 
-        if($form->isSubmitted()){
-            $data = $form->getData();
+            if($form->isSubmitted()){
+                $data = $form->getData();
 
-            $user = new User();
-            $user->setEmail($data['email']);
-            $user->setPassword(
-                $passwordEncoder->encodePassword($user, $data['password'])
-            );
+                $user = new User();
+                $user->setEmail($data['email']);
+                $user->setPassword(
+                    $passwordEncoder->encodePassword($user, $data['password'])
+                );
 
-            $user->setName($data['name']);
+                $user->setName($data['name']);
 
-            dump($user);
+                dump($user);
 
-            $em = $this->getDoctrine()->getManager();
+                $em = $this->getDoctrine()->getManager();
 
-            $em->persist($user);
-            $em->flush();
+                $em->persist($user);
+                $em->flush();
 
-            return $this->redirect($this->generateUrl('app_login'));
-        }
+                return $this->redirect($this->generateUrl('app_login'));
+            }
 
         return $this->render('registration/index.html.twig', [
                 'form' => $form->createView()
