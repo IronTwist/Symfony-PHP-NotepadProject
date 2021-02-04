@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * @Route("/post", name="post.")
@@ -52,15 +53,29 @@ class PostController extends AbstractController
             
             $em = $this->getDoctrine()->getManager();
 
-            // dump($post);
-            $em->persist($post);
-            $em->flush();
+            /**
+             * @var UploadedFile $file
+             */
+            $file = $request->files->get('post')['attachment'];
+
+            if($file){
+                $filename = md5(uniqid()).'.'.$file->guessClientExtension();
+
+                $file->move($this->getParameter('uploads_directory'), $filename);
+
+                $post->setImage($filename);
+                dump($em);
+
+                $em->persist($post);
+                $em->flush();
+
+            }
+
+            
             
             return $this->redirectToRoute('post.index');
         }
 
-        //return a response
-        // return $this->redirect($this->generateUrl('post.index'));
         return $this->render('post/create.html.twig', [
             'form' => $form->createView()
         ]);
@@ -74,11 +89,11 @@ class PostController extends AbstractController
      */
     public function show($id, PostRepository $postRepository){
 
-        $post = $postRepository->find($id);
-        // dump($post);
+        $post = $postRepository->findPostWithCategory($id);
+        dump($post);
         //create the show view
 
-        if(isset($id)){
+        if(isset($id)){ 
             $_SESSION['logat'] = true;
         }else{
             $_SESSION['logat'] = false;
