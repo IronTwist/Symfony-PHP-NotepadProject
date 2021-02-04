@@ -1,7 +1,7 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    <h1>{{ dump(this[0].title) }}</h1>
+    <h1>{{ post.title }}</h1>
     <div>Id-ul pentru aceasta postare este {{ post.id }}</div>
     <div>
         <img src="{{ '../../uploads/' ~ post.image }}" width="300" alt="{{ post.image }}" >

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Post;
 use App\Form\PostType;
 use App\Repository\PostRepository;
+use App\Services\FileUploaderService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -40,9 +41,9 @@ class PostController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    public function create(Request $request){
+    public function create(Request $request, FileUploaderService $fileUploaderService){
         //create a new post
-
+        // dump($fileUploaderService);
         $post = new Post();
 
         $form = $this->createForm(PostType::class, $post);
@@ -59,10 +60,9 @@ class PostController extends AbstractController
             $file = $request->files->get('post')['attachment'];
 
             if($file){
-                $filename = md5(uniqid()).'.'.$file->guessClientExtension();
 
-                $file->move($this->getParameter('uploads_directory'), $filename);
-
+                $filename = $fileUploaderService->uploadFile($file);
+               
                 $post->setImage($filename);
                 dump($em);
 
@@ -71,8 +71,6 @@ class PostController extends AbstractController
 
             }
 
-            
-            
             return $this->redirectToRoute('post.index');
         }
 
@@ -89,7 +87,7 @@ class PostController extends AbstractController
      */
     public function show($id, PostRepository $postRepository){
 
-        $post = $postRepository->findPostWithCategory($id);
+        $post = $postRepository->find($id);
         dump($post);
         //create the show view
 
