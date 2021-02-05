@@ -4,12 +4,14 @@ namespace App\Controller;
 
 use App\Entity\Post;
 use App\Form\PostType;
+use App\Repository\CategoryRepository;
 use App\Repository\PostRepository;
 use App\Services\FileUploaderService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
@@ -25,13 +27,17 @@ class PostController extends AbstractController
      * @param PostRepository $postRepository
      * @return Response
      */
-    public function index(PostRepository $postRepository): Response
+    public function index(PostRepository $postRepository, CategoryRepository $categoryRepository): Response
     {
 
+        
+        $categories = $categoryRepository->findAll();
+        dump($categories);
         $posts = $postRepository->findAll();
 
         return $this->render('post/index.html.twig', [
-            'posts' => $posts
+            'posts' => $posts,
+            'categorys' => $categories
         ]);
     }
     
@@ -72,8 +78,7 @@ class PostController extends AbstractController
                 $filename = $fileUploaderService->uploadFile($file);
                
                 $post->setImage($filename);
-                // dump($$filename);
-
+                
                 $em->persist($post);
                 $em->flush();
 
@@ -117,7 +122,7 @@ class PostController extends AbstractController
      */
     public function remove($id, PostRepository $postRepository){
         $post= $postRepository->find($id);
-
+        //TODO remove picture for post
         $em = $this->getDoctrine()->getManager();
         $em->remove($post);
         $em->flush();

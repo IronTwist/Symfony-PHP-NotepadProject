@@ -35,4 +35,24 @@
             {% endfor %}
         </tbody>
     </table
+
+
+    <div>
+    <ol>
+        {% for category in categorys %}
+        
+           <li> {{ category }} </li>
+                <ul>
+                {% for post in posts %}
+                    
+                    {% if category == post.category %}
+                       <li> {{ post.title }}</li>
+                    {% endif %}
+                    
+                {% endfor %}
+                </ul>
+        
+        {% endfor %}
+    </ol>   
+    </div>
 {% endblock %}
