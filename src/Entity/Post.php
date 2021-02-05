@@ -36,6 +36,11 @@ class Post
      */
     private $category;
 
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $note;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -73,6 +78,18 @@ class Post
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getNote(): ?string
+    {
+        return $this->note;
+    }
+
+    public function setNote(string $note): self
+    {
+        $this->note = $note;
 
         return $this;
     }

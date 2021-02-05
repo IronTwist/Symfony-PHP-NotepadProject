@@ -58,13 +58,21 @@ class PostController extends AbstractController
              * @var UploadedFile $file
              */
             $file = $request->files->get('post')['attachment'];
+            dump($file);
 
-            if($file){
+            if(is_null($file)){
+                $post->setImage("");
+
+                $em->persist($post);
+                $em->flush();
+            }
+
+            if(!is_null($file)){
 
                 $filename = $fileUploaderService->uploadFile($file);
                
                 $post->setImage($filename);
-                dump($em);
+                // dump($$filename);
 
                 $em->persist($post);
                 $em->flush();

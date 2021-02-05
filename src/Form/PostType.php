@@ -11,21 +11,30 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class PostType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', TextareaType::class, [
-                'label' => "Write new Note",
+            ->add('title', TextType::class, [
+                'label' => "Title",
                 'attr' => [
-                    'style' => 'width: 280px; height: 120px; margin-bottom: 10px'
-                    
+                    'style' => 'width: 280px; margin-bottom: 10px'
+                ]
+            ])
+            ->add('note', TextareaType::class, [
+                'label' => 'Write note',
+                'attr' => [
+                    'style' => 'width: 100%; height: 120px; margin-bottom: 10px'
                 ]
             ])
             ->add('attachment', FileType::class,[
-                    'mapped' => false
+                    'mapped' => false,
+                    'attr' => [
+                        'empty_data' => ''
+                    ]
             ])
             ->add('category', EntityType::class, [
                 'class' => Category::class,
@@ -36,7 +45,8 @@ class PostType extends AbstractType
             ])
             ->add('save', SubmitType::class, [
                 'attr' => [
-                    'class' => 'btn btn-primary float-right'
+                    'class' => 'btn btn-primary float-right',
+                    'style' => 'margin-left: 80%'
                 ]
             ])
         ;

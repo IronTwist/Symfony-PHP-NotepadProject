@@ -19,14 +19,15 @@ class FileUploaderService{
 
     public function uploadFile(UploadedFile $file){
 
-        $filename = md5(uniqid()).'.'.$file->guessClientExtension();
+        
+            $filename = md5(uniqid()).'.'.$file->guessClientExtension();
 
-        $file->move(
-            $this->container->getParameter('uploads_directory'), 
-            $filename
-        );
+            $file->move(
+                $this->container->getParameter('uploads_directory'), 
+                $filename
+            );
 
-        return $filename;
+            return $filename;
 
     }
 

@@ -16,6 +16,15 @@
     text-align: right;
 }
 
+.addNoteForm{
+    width: 400px;
+    border: 1px solid black;
+    padding: 20px;
+    box-shadow:  2px 2px 6px 2px black;
+    margin-top: 20px;
+    /* text-align: right; */
+}
+
 .navigare {
     background-color: coral;
 }
@@ -29,7 +38,17 @@
     margin-top: 20px;
 }
 
+div.displayNote{
+    width: 300px;
+    border: 1px solid black;
+    border-radius: 1em;
+    padding: 10px;
+    margin-top: 10px;
+    box-shadow:  2px 2px 6px 2px black;
+}
+
 h5{
     float: right;
     margin-right: 100px;
 }
+

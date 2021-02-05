@@ -1,12 +1,22 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    <h1>{{ post.title }}</h1>
-    <div>Id-ul pentru aceasta postare este {{ post.id }}</div>
-    <div>
-        <img src="{{ '../../uploads/' ~ post.image }}" width="300" alt="{{ post.image }}" >
-    </div>
-    <div>
-        <span>Category: {{ post.category }}</span>
+    
+    {# <div>Id-ul pentru aceasta postare este {{ post.id }}</div> #}
+    
+    <div class="displayNote">
+        
+
+        {% if post.image != "" %}
+            <div>
+                <img src="{{ '../../uploads/' ~ post.image }}" width="100%" alt="{{ post.image }}" >
+            </div>
+        {% endif %}
+
+        
+        <h1>{{ post.title }}</h1>
+        <p>{{ post.note }}</p></br><hr>
+    
+        <span style="size:8px">Category: {{ post.category }}</span>
     </div>
 {% endblock %}
